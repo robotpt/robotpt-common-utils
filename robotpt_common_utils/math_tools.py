@@ -1,8 +1,8 @@
+import math
+
+
 def round_down(x):
-    if x >= 0:
-        return int(x)
-    if x < 0:
-        return int(x) - 1
+    return math.floor(x)
 
 
 def bound(value, lower_bound=None, upper_bound=None):
@@ -16,3 +16,10 @@ def bound(value, lower_bound=None, upper_bound=None):
         value = max(value, lower_bound)
 
     return value
+
+
+def is_int(x):
+    try:
+        return int(x) == x
+    except (ValueError, TypeError):
+        return False
