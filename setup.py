@@ -11,6 +11,7 @@ setup(
   author_email='audrowna@usc.edu',
   url='https://github.com/robotpt/robotpt-common-utils',
   install_requires=[
+    'pandas',
   ],
   classifiers=[
     'Development Status :: 3 - Alpha',
