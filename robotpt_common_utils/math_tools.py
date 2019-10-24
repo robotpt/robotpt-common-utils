@@ -20,6 +20,6 @@ def bound(value, lower_bound=None, upper_bound=None):
 
 def is_int(x):
     try:
-        return int(x) == x
+        return int(x) == float(x)
     except (ValueError, TypeError):
         return False
