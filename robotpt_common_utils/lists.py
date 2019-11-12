@@ -58,3 +58,21 @@ def append_type_to_list(list_, objs, type_):
         objs,
         lambda obj: type(obj) is type_
     )
+
+
+def remove_repeats(list_, is_remove_from_front=True):
+
+    if is_remove_from_front:
+        out = _remove_repeats(list_)
+    else:
+        list_.reverse()
+        out = _remove_repeats(list_)
+        out.reverse()
+    return out
+
+
+def _remove_repeats(list_):
+    list_ = make_sure_is_iterable(list_)
+    seen = set()
+    return [x for x in list_ if not (x in seen or seen.add(x))]
+

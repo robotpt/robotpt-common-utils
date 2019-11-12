@@ -193,3 +193,50 @@ class TestLists(unittest.TestCase):
                 lambda x: x > 0
             )
         )
+
+    def test_remove_repeats(self):
+
+        input_list = []
+        truth_out = []
+        out = lists.remove_repeats(input_list)
+        self.assertEqual(len(truth_out), len(out))
+
+        input_list = [1, 2, 3, 1, 4, 5, 2]
+        truth_out = [1, 2, 3, 4, 5]
+        out = lists.remove_repeats(input_list)
+        self.assertEqual(len(truth_out), len(out))
+        for i in range(len(truth_out)):
+            self.assertEqual(
+                truth_out[i],
+                out[i]
+            )
+
+        input_list = ["abc", "def", "abc", "def"]
+        truth_out = ["abc", "def"]
+        out = lists.remove_repeats(input_list)
+        self.assertEqual(len(truth_out), len(out))
+        for i in range(len(truth_out)):
+            self.assertEqual(
+                truth_out[i],
+                out[i]
+            )
+
+        input_list = ("abc", "def", "abc", "def")
+        truth_out = ["abc", "def"]
+        out = lists.remove_repeats(input_list)
+        self.assertEqual(len(truth_out), len(out))
+        for i in range(len(truth_out)):
+            self.assertEqual(
+                truth_out[i],
+                out[i]
+            )
+
+        input_list = [1, 2, 3, 1, 4, 5, 2]
+        truth_out = [3, 1, 4, 5, 2]
+        out = lists.remove_repeats(input_list, False)
+        self.assertEqual(len(truth_out), len(out))
+        for i in range(len(truth_out)):
+            self.assertEqual(
+                truth_out[i],
+                out[i]
+            )
