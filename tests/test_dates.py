@@ -111,3 +111,90 @@ class TestDates(unittest.TestCase):
                 truth_date_range[i],
                 test_date_range[i]
             )
+
+    def test_time_from_0(self):
+        for i in range(0, 12):
+            t = datetime.time(i, 0)
+            self.assertEqual(
+                datetime.timedelta(hours=i),
+                dates._time_from_0(t)
+            )
+        for i in range(12, 24):
+            t = datetime.time(i, 0)
+            self.assertEqual(
+                datetime.timedelta(days=-1, hours=i),
+                dates._time_from_0(t)
+            )
+
+    def test_subtract_times(self):
+
+        self.assertEqual(
+            datetime.timedelta(minutes=1),
+            dates.subtract_times(
+                datetime.time(0, 0),
+                datetime.time(0, 1),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(days=-1, hours=23, minutes=59),
+            dates.subtract_times(
+                datetime.time(0, 0),
+                datetime.time(23, 59),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(hours=3, minutes=1),
+            dates.subtract_times(
+                datetime.time(0, 0),
+                datetime.time(3, 1),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(hours=-3, minutes=-1),
+            dates.subtract_times(
+                datetime.time(3, 1),
+                datetime.time(0, 0),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(hours=-3, minutes=-1),
+            dates.subtract_times(
+                datetime.time(0, 0),
+                datetime.time(20, 59),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(hours=-3, minutes=-1),
+            dates.subtract_times(
+                datetime.time(3, 0),
+                datetime.time(23, 59),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(days=0, hours=0, minutes=1),
+            dates.subtract_times(
+                datetime.time(23, 59),
+                datetime.time(0, 0),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(days=-1, hours=12),
+            dates.subtract_times(
+                datetime.time(0, 0),
+                datetime.time(12, 0),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(days=-1, hours=12),
+            dates.subtract_times(
+                datetime.time(12, 0),
+                datetime.time(0, 0),
+            )
+        )
+        self.assertEqual(
+            datetime.timedelta(days=-1, hours=12),
+            dates.subtract_times(
+                datetime.time(14, 10),
+                datetime.time(2, 10),
+            )
+        )

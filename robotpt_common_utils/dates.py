@@ -52,3 +52,33 @@ def get_date_range(
             for date in date_range
         ]
 
+
+def subtract_times(t1, t2):
+
+    if type(t1) is not datetime.time or type(t2) is not datetime.time:
+        raise ValueError
+
+    dt1 = _time_from_0(t1)
+    dt2 = _time_from_0(t2)
+    days = dt2.days - dt1.days
+    seconds = dt2.seconds - dt1.seconds
+    if abs(seconds) == 24*60*60:
+        seconds = 0
+    elif abs(seconds) == 12*60*60:
+        seconds = 12*60*60
+        days = -1
+    elif seconds > 12*60*60 and days == 0:
+        seconds = -(seconds - 12*60*60)
+        days = 0
+    return datetime.timedelta(days=days, seconds=seconds)
+
+
+def _time_from_0(t):
+    t_dt = datetime.datetime.now().replace(hour=t.hour, minute=t.minute, second=t.second, microsecond=t.microsecond)
+    midnight = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    dt = t_dt - midnight
+    if dt.seconds == 24*60*60:
+        dt = datetime.timedelta()
+    if dt.seconds >= 12*60*60:
+        dt = datetime.timedelta(seconds=dt.seconds - 24*60*60)
+    return dt
