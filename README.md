@@ -1,6 +1,9 @@
 README
 ======
 
+[![Build Status](https://travis-ci.com/robotpt/robotpt-common-utils.svg?branch=master)](https://travis-ci.com/robotpt/robotpt-common-utils)
+[![Downloads](https://pepy.tech/badge/robotpt-common-utils)](https://pepy.tech/project/robotpt-common-utils)
+
 A collection of common functions.
 
 Setup
